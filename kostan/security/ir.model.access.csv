@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_kostan_tipe,access.kostan.tipe,model_kostan_tipe,,1,1,1,1
+access_kostan_karyawan,access.kostan.karyawan,model_kostan_karyawan,,1,1,1,1
+access_kostan_transaksi,access.kostan.transaksi,model_kostan_transaksi,,1,1,1,1
+access_kostan_transaksiorder,access.kostan.transaksiorder,model_kostan_transaksiorder,,1,1,1,1

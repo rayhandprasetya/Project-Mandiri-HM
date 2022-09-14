@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- kostan.tipe tree view -->
+    <record id="kostan_tipe_view_tree" model="ir.ui.view">
+        <field name="name">Daftar Kost</field>
+        <field name="model">kostan.tipe</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="harga"/>
+                <field name="stok"/>
+                <field name="karyawan_id" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- kostan.tipe form view -->
+    <record id="kostan_tipe_view_form" model="ir.ui.view">
+        <field name="name">Form Kost</field>
+        <field name="model">kostan.tipe</field>
+        <field name="arch" type="xml">
+            <form string=""> 
+                
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="harga"/>    
+                        <field name="stok"/>                    
+                    </group>
+                    <group name="karyawan" string="Karyawan">
+                        <field name="karyawan_id" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- kostan.tipe action window -->
+    <record id="kostan_tipe_action" model="ir.actions.act_window">
+        <field name="name">Daftar Kostan</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">kostan.tipe</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="kostan_tipe_menu_act" name="Tipe Kos" parent="kostan_menu_root" action="kostan_tipe_action" sequence="20"/>
+
+
+</odoo>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- kostan.transaki tree view -->
+    <record id="kostan_transaksi_view_tree" model="ir.ui.view">
+        <field name="name">List Transaksi</field>
+        <field name="model">kostan.transaksi</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="nama_penyewa"/>
+                <field name="nik"/>
+                <field name="tgl_sewa"/>       
+                <field name="total_bayar"/>    
+                <field name="state"/>     
+            </tree>
+        </field>
+    </record>
+
+    <!-- kostan.transaksi form view -->
+    <record id="kostan_transaksi_view_form" model="ir.ui.view">
+        <field name="name">Form Transaksi</field>
+        <field name="model">kostan.transaksi</field>
+        <field name="arch" type="xml">
+            <form string="Form Penjualan">
+                <header>
+                <button name="action_confirm" type="object" string="Confirm" class="btn btn-primary" states="draft"/>
+                <button name="action_done" type="object" string="Done" class="btn btn-primary" states="confirm"/>
+                <button name="action_cancel" type="object" string="Cancel" class="btn btn-warning" states="confirm" confirm="Batalkan?"/>
+                <button name="action_draft" type="object" string="Back to Draft" class="btn btn-danger" states="cancelled" confirm="Edit?"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm,done"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="nama_penyewa" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                        <field name="nik" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                        <field name="tgl_sewa"/>       
+                        <field name="total_bayar"/>              
+                    </group>
+                    <group>
+                        <field name="transaksiorder_ids">
+                            <tree editable='bottom'>
+                                <field name="barang_id"/>
+                                <field name="harga_sewa"/>
+                                <field name="jmlh_kamar"/>
+                                <field name="subtotal" sum='Total'/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- kostan.transaksi action window -->
+    <record id="kostan_transaksi_action" model="ir.actions.act_window">
+        <field name="name">Transaksi</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">kostan.transaksi</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="penjualan_view_menu_act" name="Transaksi" parent="kostan_menu_root" action="kostan_transaksi_action" sequence="20"/>
+
+</odoo>

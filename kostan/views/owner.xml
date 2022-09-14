@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- res.partner inherit tree view -->
+    <record id="res_partner_owner_view_tree" model="ir.ui.view">
+        <field name="name">res.partner.view.tree</field>
+        <field name="model">res.partner</field>
+        <field name="mode">extension</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='function']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- res.partner form view -->
+    <record id="res_partner_owner_view_form" model="ir.ui.view">
+        <field name="name">res.partner.view.form</field>
+        <field name="model">res.partner</field>
+        <field name="mode">extension</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='function']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='vat']" position="attributes">
+                <attribute name="string">NPWP</attribute>
+            </xpath>
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="is_owner"/>
+            </xpath> 
+        </field>
+    </record>
+
+    <!-- res.partner search view -->
+    <record id="res_partner_owner_inherit_view_search" model="ir.ui.view">
+        <field name="name">res.partner.view.search</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <field name="parent_id" position='after'>
+                <filter name="owner" string="Owner" domain="[('is_owner', '=', 'True')]"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- res.partner inherit action window -->
+    <record id="res_partner_owner_action" model="ir.actions.act_window">
+        <field name="name">Owner</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="context">
+            {
+                'search-default_owner':1,
+                'default_is_owner': True
+            }
+        </field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="owner_view_menu_act" name="Owner" parent="kostan_menu_root" action="res_partner_owner_action" sequence="30"/>
+
+
+</odoo>

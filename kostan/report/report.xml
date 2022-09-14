@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="report_transaksi_xlsx" model="ir.actions.report">
+        <field name="name">Transaksi Excel</field>
+        <field name="model">kostan.transaksi</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">kostan.report_transaksi_xlsx</field>
+         <field name="report_file">kostan.report_transaksi_xlsx</field>
+        <field name="binding_model_id" ref="model_kostan_transaksi"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <record id="report_transaksi_pdf" model="ir.actions.report">
+        <field name="name">Print Faktur</field>
+        <field name="model">kostan.transaksi</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">kostan.report_transaksi_pdf</field>
+        <field name="report_file">kostan.report_transaksi_pdf</field>
+        <field name="binding_model_id" ref="model_kostan_transaksi"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

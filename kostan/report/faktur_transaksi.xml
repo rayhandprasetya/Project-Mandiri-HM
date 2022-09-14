@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_transaksi_pdf">
+        <t t-call="web.html_container">
+            <t t-call="web.internal_layout">
+                <div class="page">
+                    <h2><b>Faktur Transaksi Kost</b></h2>
+                    <t t-foreach="docs" t-as="d">
+                        <div class="row">
+                            <div class="col-4">Name Penyewa :</div>
+                            <div class="col-8"><span t-field="d.nama_penyewa"/></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">Nik :</div>
+                            <div class="col-8"><span t-field="d.nik"/></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">Tanggal Sewa :</div>
+                            <div class="col-8"><span t-field="d.tgl_sewa"/></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">Total :</div>
+                            <div class="col-8"><span t-field="d.total_bayar"/></div>
+                        </div>
+                        <t t-foreach="d.transaksiorder_ids" t-as="ds">
+                            <div class="row">
+                                <div class="col-4">Kost :</div>
+                                <div class="col-8"><span t-field="ds.barang_id.name"/></div>
+                            </div>
+                        </t>
+                    </t>    
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>
